@@ -1,0 +1,34 @@
+<button mat-icon-button (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+</button>
+
+<mat-card>
+    <mat-grid-list cols="2" rowHeight="2:1" *ngIf="selectedPokemon">
+        <mat-grid-tile>
+            <mat-list>
+                <mat-list-item class="img-item"><img class="pokemon-icon" src="/assets/img/official-artwork/{{selectedPokemon.id}}.png"></mat-list-item>
+                <mat-list-item class="center-text"><div>No. {{ selectedPokemon.id | number : '3.0-0'}}</div></mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+            
+        <mat-grid-tile>
+            <mat-list>
+                <mat-list-item role="listitem">{{selectedPokemon.name}}
+                    <button mat-icon-button (click)="onClick()">
+                        <mat-icon>play_circle</mat-icon>
+                    </button>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                    <mat-chip-list *ngFor="let type of selectedPokemon.types">
+                        <mat-chip>{{type}}</mat-chip>
+                    </mat-chip-list>
+                </mat-list-item>
+                <mat-list-item role="listitem">Taille: {{selectedPokemon.height | number: '1.1-1'}} m</mat-list-item>
+                <mat-list-item role="listitem">Poids: {{selectedPokemon.weight | number: '1.1-1'}} kg</mat-list-item>
+            </mat-list>
+            
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">{{ selectedPokemon.description }}</mat-grid-tile>
+
+    </mat-grid-list>
+</mat-card>

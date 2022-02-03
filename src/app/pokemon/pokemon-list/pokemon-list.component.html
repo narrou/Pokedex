@@ -1,0 +1,8 @@
+<mat-selection-list #pokemon [multiple]="false" infiniteScroll (scrolled)="onScroll()">
+    <mat-list-option *ngFor="let pokemon of listPokemon">
+        <div class="col">
+            
+            <div mat-line routerLink="/pokemon/{{pokemon.id}}"><img class="pokemon-icon" src="/assets/img/sprites/{{pokemon.id}}.png">{{pokemon.id}}. {{pokemon.name}}</div>
+        </div>
+    </mat-list-option>
+</mat-selection-list>
