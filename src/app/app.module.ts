@@ -4,6 +4,7 @@ import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 
 
 import { MatChipsModule } from '@angular/material/chips';
@@ -16,17 +17,23 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
+import { PokedexComponent } from './pokedex/pokedex.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
     PokemonListComponent,
-    PokemonDetailComponent
+    PokemonDetailComponent,
+    PokedexComponent
   ],
   imports: [
     BrowserModule,
     MatChipsModule,
     InfiniteScrollModule,
+    MatSidenavModule,
+    FormsModule,
+    MatInputModule,
     MatGridListModule,
     MatCardModule,
     AppRoutingModule,

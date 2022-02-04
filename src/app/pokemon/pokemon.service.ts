@@ -23,4 +23,8 @@ export class PokemonService {
   getSinglePokemon(id: number): Observable<any> {
     return this.http.get<any>(this.apiRoute + "/pokemons/" + id);
   }
+
+  getSearchPokemon(input: string): Observable<any> {
+    return this.http.get<any>(this.apiRoute + "/pokemons?search=" + input);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from '../pokemon.model';
 import { PokemonService } from '../pokemon.service';
@@ -14,23 +14,29 @@ export class PokemonDetailComponent implements OnInit {
   faPlayCircle = faPlayCircle;
   selectedPokemon?: Pokemon;
   audio?: HTMLAudioElement;
+  @Input() id?: number;
   constructor(private route: ActivatedRoute,
     private pokemonService: PokemonService,
     private location: Location) { }
 
-  ngOnInit(): void {
-    this.getPokemon();
+  ngOnInit() {
+    
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes["id"].currentValue);
+    this.getPokemon(changes["id"].currentValue);
     this.loadAudio();
   }
 
-  getPokemon(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+  getPokemon(id: number): void {
     this.pokemonService.getSinglePokemon(id)
       .subscribe(pokemon => this.selectedPokemon = pokemon);
   }
+
   loadAudio(){
     this.audio = new Audio();
-    this.audio.src = "/assets/audio/" + this.route.snapshot.paramMap.get('id') + ".mp3";
+    this.audio.src = "/assets/audio/" + this.id + ".mp3";
     this.audio.load();
   }
 
