@@ -1,0 +1,25 @@
+<mat-toolbar>
+    <span>Pokedex</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon person-icon" aria-label="Example icon-button with person icon" (click)="userConnect()">
+      <mat-icon>person</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-drawer-container class="example-container">
+    
+            <mat-drawer mode="side" opened>
+                <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 list">
+                    <mat-tab label="Pokemons" class="my-pokemon"> 
+                        <app-pokemon-list (select)="onSelect($event)"></app-pokemon-list>
+                    </mat-tab>
+                    <mat-tab label="Team"> <app-team (select)="onSelect($event)"></app-team> </mat-tab>
+                </mat-tab-group>
+            </mat-drawer>
+       
+    
+    <mat-drawer-content>
+        <app-pokemon-detail [id]="selectedPokemonId" *ngIf="selectedPokemonId" class="full-width">
+            
+        </app-pokemon-detail>
+    </mat-drawer-content>
+</mat-drawer-container>

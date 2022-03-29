@@ -9,7 +9,7 @@ import { ChangeDetectorRef, AfterContentChecked} from '@angular/core';
   styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent implements OnInit {
-  offset: number = 10;
+  offset: number = 0;
   limit: number = 20;
   listPokemon?: Pokemon[];
   selectedPokemonId?: number;
@@ -21,13 +21,15 @@ export class PokemonListComponent implements OnInit {
     @Input() set searchedPokemon(value: string) {
     
        this._searchedPokemon = value;
-       console.log(value);
        if (this.searchedPokemon == '') {
+         this.offset = 0;
          this.getPokemon();
          return
        }
        else {
-        this.getSearchPokemon(this._searchedPokemon);
+         this.offset = 0;
+         this.listPokemon = [];
+        this.getSearchPokemon(this._searchedPokemon, this.offset, this.limit);
        }
        
     
@@ -52,24 +54,31 @@ export class PokemonListComponent implements OnInit {
     this.getPokemon();
   }
 
-  getSearchPokemon(input: string) {
-    this.pokemonService.getSearchPokemon(input).subscribe(p => {
-      this.listPokemon = p.data;
+  getSearchPokemon(input: string, offset: number, limit: number) {
+    this.pokemonService.getSearchPokemon(input, offset, limit).subscribe(p => {
+      this.listPokemon?.push.apply(this.listPokemon, p.data);
     });
+    this.offset += 20;
   }
 
   getPokemon() {
     this.pokemonService.getPokemonRange(this.offset, this.limit).subscribe(p => {
       this.listPokemon = p.data;
     });
+    this.offset += 20;
   }
 
   onScroll(){
-    console.log("we scroll");
-    this.pokemonService.getPokemonRange(this.offset, this.limit).subscribe(p => {
-      this.listPokemon?.push.apply(this.listPokemon, p.data);
-    });
-    this.offset += 10;
+    console.log("a");
+    if (this.searchedPokemon == '') {
+      this.pokemonService.getPokemonRange(this.offset, this.limit).subscribe(p => {
+        this.listPokemon?.push.apply(this.listPokemon, p.data);
+      });
+      this.offset += 20;
+    }
+    else {
+      this.getSearchPokemon(this.searchedPokemon, this.offset, this.limit);
+    }
   }
 
   selectPokemon(id: number){

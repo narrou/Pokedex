@@ -15,6 +15,7 @@ export class PokemonDetailComponent implements OnInit {
   selectedPokemon?: Pokemon;
   audio?: HTMLAudioElement;
   @Input() id?: number;
+  
   constructor(private route: ActivatedRoute,
     private pokemonService: PokemonService,
     private location: Location) { }
@@ -27,6 +28,7 @@ export class PokemonDetailComponent implements OnInit {
     console.log(changes["id"].currentValue);
     this.getPokemon(changes["id"].currentValue);
     this.loadAudio();
+    this.audio?.play();
   }
 
   getPokemon(id: number): void {

@@ -1,16 +1,16 @@
 <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Clearable input</mat-label>
+    <mat-label>Who's that Pokemon ?</mat-label>
     <input matInput type="text" placeholder="Pokemon" [(ngModel)]="searchedPokemon">
     <button *ngIf="searchedPokemon" matSuffix mat-icon-button aria-label="Clear" (click)="searchedPokemon=''">
       <mat-icon>close</mat-icon>
     </button>
 </mat-form-field>
 
-<mat-selection-list #pokemon [multiple]="false" infiniteScroll (scrolled)="onScroll()">
-    <mat-list-option *ngFor="let pokemon of listPokemon" (click)="selectPokemon(pokemon.id)">
+<mat-nav-list #pokemon infiniteScroll [scrollWindow]="false" (scrolled)="onScroll()" class="list">
+    <mat-list-item *ngFor="let pokemon of listPokemon" (click)="selectPokemon(pokemon.id)">
         <div class="col">
             
             <div mat-line><img class="pokemon-icon" src="/assets/img/sprites/{{pokemon.id}}.png">{{pokemon.id}}. {{pokemon.name}}</div>
         </div>
-    </mat-list-option>
-</mat-selection-list>
+    </mat-list-item>
+</mat-nav-list>

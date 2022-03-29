@@ -1,9 +1,9 @@
-<mat-card *ngIf="id">
-    <mat-grid-list cols="2" rowHeight="2:1" *ngIf="selectedPokemon">
+<mat-card *ngIf="id" class="card-pokemon">
+    <mat-grid-list cols="2" rowHeight="fit" *ngIf="selectedPokemon" class="grid-list">
         <mat-grid-tile>
             <mat-list>
                 <mat-list-item class="img-item"><img class="pokemon-icon" src="/assets/img/official-artwork/{{selectedPokemon.id}}.png"></mat-list-item>
-                <mat-list-item class="center-text"><div>No. {{ selectedPokemon.id | number : '3.0-0'}}</div></mat-list-item>
+                <mat-list-item class="center-text">No. {{ selectedPokemon.id | number : '3.0-0'}}</mat-list-item>
             </mat-list>
         </mat-grid-tile>
             
